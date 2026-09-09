@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /gifts/{giftId} {
+      // Anyone can read the list — that's the whole point of the page.
+      allow read: if true;
+
+      // Anyone can add a new, unclaimed gift (this is how `npm run
+      // seed` writes without needing admin credentials). A created
+      // document can't already be marked claimed.
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['name', 'desc', 'category', 'price', 'blocked', 'blockedAt', 'salt', 'pinHash']
+                      ) &&
+                      request.resource.data.name is string &&
+                      request.resource.data.desc is string &&
+                      request.resource.data.category is string &&
+                      request.resource.data.price is number &&
+                      request.resource.data.blocked == false &&
+                      request.resource.data.blockedAt == null &&
+                      request.resource.data.salt == null &&
+                      request.resource.data.pinHash == null;
+
+      // Claiming/unclaiming may only touch the claim-related fields —
+      // the name, price, description and category of a gift can never
+      // be changed by a visitor.
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+                        .hasOnly(['blocked', 'blockedAt', 'salt', 'pinHash']) &&
+                      request.resource.data.name == resource.data.name &&
+                      request.resource.data.desc == resource.data.desc &&
+                      request.resource.data.category == resource.data.category &&
+                      request.resource.data.price == resource.data.price;
+
+      // Gifts are never deleted from the app.
+      allow delete: if false;
+    }
+  }
+}
