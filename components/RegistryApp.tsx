@@ -15,7 +15,6 @@ import { CATEGORIES } from "@/lib/categories";
 import { randomHex, sha256Hex } from "@/lib/crypto";
 import { mineMap, rememberMine, forgetMine } from "@/lib/mine";
 import { GiftCard } from "./GiftCard";
-import { DogMascot } from "./DogMascot";
 import { ClaimModal } from "./ClaimModal";
 import { UnclaimModal } from "./UnclaimModal";
 
@@ -128,12 +127,9 @@ export function RegistryApp() {
         </p>
         <div className="divider" aria-hidden="true" />
         {gifts && (
-          <>
-            <DogMascot available={available} total={gifts.length} />
-            <p className="status-line">
-              {available} of {gifts.length} gifts still available
-            </p>
-          </>
+          <p className="status-line">
+            {available} of {gifts.length} gifts still available
+          </p>
         )}
       </header>
 
