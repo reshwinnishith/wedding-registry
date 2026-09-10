@@ -350,6 +350,22 @@ h1.names {
   background: var(--rose);
 }
 
+.view-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-strong);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+  color: var(--ink);
+}
+
 .link-unblock {
   background: none;
   border: none;

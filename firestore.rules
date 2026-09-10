@@ -7,31 +7,37 @@ service cloud.firestore {
 
       // Anyone can add a new, unclaimed gift (this is how `npm run
       // seed` writes without needing admin credentials). A created
-      // document can't already be marked claimed.
+      // document can't already be marked claimed. `price` and `link`
+      // may be null (a gift without a fixed price, or without a
+      // product link).
       allow create: if request.resource.data.keys().hasOnly(
-                        ['name', 'desc', 'category', 'price', 'blocked', 'blockedAt', 'salt', 'pinHash']
+                        ['name', 'desc', 'category', 'price', 'link', 'blocked', 'blockedAt', 'salt', 'pinHash']
                       ) &&
                       request.resource.data.name is string &&
                       request.resource.data.desc is string &&
                       request.resource.data.category is string &&
-                      request.resource.data.price is number &&
+                      (request.resource.data.price is number || request.resource.data.price == null) &&
+                      (request.resource.data.link is string || request.resource.data.link == null) &&
                       request.resource.data.blocked == false &&
                       request.resource.data.blockedAt == null &&
                       request.resource.data.salt == null &&
                       request.resource.data.pinHash == null;
 
       // Claiming/unclaiming may only touch the claim-related fields —
-      // the name, price, description and category of a gift can never
-      // be changed by a visitor.
+      // the name, price, link, description and category of a gift can
+      // never be changed by a visitor.
       allow update: if request.resource.data.diff(resource.data).affectedKeys()
                         .hasOnly(['blocked', 'blockedAt', 'salt', 'pinHash']) &&
                       request.resource.data.name == resource.data.name &&
                       request.resource.data.desc == resource.data.desc &&
                       request.resource.data.category == resource.data.category &&
-                      request.resource.data.price == resource.data.price;
+                      request.resource.data.price == resource.data.price &&
+                      request.resource.data.link == resource.data.link;
 
-      // Gifts are never deleted from the app.
-      allow delete: if false;
+      // A gift may only be removed from the list while it's still
+      // unclaimed — once someone has claimed it, it can never be
+      // deleted out from under them.
+      allow delete: if resource.data.blocked == false;
     }
   }
 }

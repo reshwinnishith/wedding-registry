@@ -52,8 +52,8 @@ export function ClaimModal({
       <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <h2 id="modal-title">Claim &ldquo;{gift.name}&rdquo;?</h2>
         <p className="modal-desc">
-          This reserves <b>{gift.name}</b> ({formatPrice(gift.price)}) just for you. Other guests
-          will see it as taken, but never who took it.
+          This reserves <b>{gift.name}</b>{gift.price != null ? ` (${formatPrice(gift.price)})` : ""} just
+          for you. Other guests will see it as taken, but never who took it.
         </p>
         <div className="field">
           <label htmlFor="pin1">Set a PIN</label>

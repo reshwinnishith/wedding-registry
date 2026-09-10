@@ -3,6 +3,7 @@ export type Category =
   | "Home & Living"
   | "Dining"
   | "Electronics"
+  | "Toys & Games"
   | "Experiences"
   | "Keepsakes";
 
@@ -11,7 +12,8 @@ export interface Gift {
   name: string;
   desc: string;
   category: Category;
-  price: number;
+  price: number | null;
+  link: string | null;
   blocked: boolean;
   blockedAt: string | null;
   salt: string | null;

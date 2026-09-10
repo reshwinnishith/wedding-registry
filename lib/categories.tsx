@@ -6,6 +6,7 @@ export const CATEGORIES: Category[] = [
   "Home & Living",
   "Dining",
   "Electronics",
+  "Toys & Games",
   "Experiences",
   "Keepsakes",
 ];
@@ -45,6 +46,16 @@ export const CATEGORY_ICONS: Record<Category, ReactElement> = {
       <rect x="4" y="4" width="16" height="16" rx="4" />
       <circle cx="12" cy="12" r="3" />
       <path d="M12 4V2M12 22v-2" />
+    </svg>
+  ),
+  "Toys & Games": (
+    <svg {...iconProps}>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <circle cx="8.5" cy="8.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="15.5" cy="8.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="8.5" cy="15.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="15.5" cy="15.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
     </svg>
   ),
   Experiences: (
