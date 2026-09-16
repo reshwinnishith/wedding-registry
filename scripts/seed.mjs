@@ -277,6 +277,18 @@ const SEED_GIFTS = [
     salt: null,
     pinHash: null,
   },
+  {
+    id: "makemytrip-gift-card",
+    name: "MakeMyTrip Gift Card",
+    category: "Travel",
+    price: null,
+    desc: "Our future flights and hotel rooms, crowdfunded one gift card at a time. Unlike everything else here, there's no limit on how many of you get in on this one.",
+    link: "https://www.makemytrip.com/gift-cards/details/?gcid=35&productId=25",
+    blocked: false,
+    blockedAt: null,
+    salt: null,
+    pinHash: null,
+  },
 ];
 
 if (firebaseConfig.apiKey === "REPLACE_ME") {

@@ -9,6 +9,7 @@ export const CATEGORIES: Category[] = [
   "Toys & Games",
   "Experiences",
   "Keepsakes",
+  "Travel",
 ];
 
 const iconProps = {
@@ -70,6 +71,11 @@ export const CATEGORY_ICONS: Record<Category, ReactElement> = {
       <rect x="4" y="4" width="16" height="16" rx="2" />
       <circle cx="9" cy="10" r="1.6" />
       <path d="M5 17l4.5-4.5a2 2 0 0 1 2.8 0L19 19" />
+    </svg>
+  ),
+  Travel: (
+    <svg {...iconProps}>
+      <path d="M10.5 20.5 12 15l-7.5 2v-1.6L12 11V5.5a1.5 1.5 0 0 1 3 0V11l7.5 4.4V17L15 15l1.5 5.5-1.5-1-1.5 1Z" />
     </svg>
   ),
 };

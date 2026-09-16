@@ -28,6 +28,23 @@ export function GiftCard({
     </a>
   );
 
+  // Gift cards, unlike everything else on the registry, aren't a single
+  // physical item: any number of people can send one, so there's no
+  // claim/PIN flow here, just a styled button that opens the link.
+  if (gift.category === "Travel") {
+    return (
+      <article className="card">
+        <div className="icon-badge">{CATEGORY_ICONS[gift.category]}</div>
+        <h3>{gift.name}</h3>
+        <p className="desc">{gift.desc}</p>
+        {meta}
+        <a className="btn btn-claim" href={gift.link ?? undefined} target="_blank" rel="noopener noreferrer">
+          Get the link &#8599;
+        </a>
+      </article>
+    );
+  }
+
   if (!gift.blocked) {
     return (
       <article className="card">

@@ -5,7 +5,8 @@ export type Category =
   | "Electronics"
   | "Toys & Games"
   | "Experiences"
-  | "Keepsakes";
+  | "Keepsakes"
+  | "Travel";
 
 export interface Gift {
   id: string;
